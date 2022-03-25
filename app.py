@@ -27,14 +27,16 @@ class Solution:
         self.representation = representation
         self.objective_values = objective_values
 
-app = dash.Dash(
+dash_app = dash.Dash(
     __name__,
     meta_tags=[
         {"name": "viewport", "content": "width=device-width, initial-scale=1.0"}
     ],
 )
-app.title = "Pareto fronts of Land Conservation Optimization"
 
+dash_app.title = "Pareto fronts of Land Conservation Optimization"
+
+app = dash_app.server
 
 def convert_to_monetary_scale(soil_loss,labor_req, study_area_size):
     # 1. Estimate yield loss in dollars per soil loss
@@ -203,7 +205,7 @@ def create_layout():
     )
 
 
-def interactiveParetoFront(app,input_data, save_front = None):
+def interactiveParetoFront(dash_app,input_data, save_front = None):
     
     def generate_figure_image(study_area, figure, points, layout,opacity):
         figure.add_trace(go.Scatter(
@@ -247,7 +249,7 @@ def interactiveParetoFront(app,input_data, save_front = None):
             legend={'itemsizing': 'constant'})
         # figure.update_layout(legend_title=labels[np.where(run_folders == run)][0])
         return figure
-    @app.callback(
+    @dash_app.callback(
         Output("pareto_front", "figure"),
         [Input("plotmode-dropdown", "value"),Input("study_area-dropdown", "value")]
     )
@@ -404,7 +406,7 @@ def interactiveParetoFront(app,input_data, save_front = None):
                             height=(height_cm * 2.54) * ppi)
         return figure
 
-    @app.callback(
+    @dash_app.callback(
         Output("selected_data", "figure"),
         [
             Input("pareto_front", "clickData"),
@@ -521,15 +523,8 @@ def interactiveParetoFront(app,input_data, save_front = None):
                 raise PreventUpdate
         return {}
 
-# inititalize the app
-app = dash.Dash(
-    __name__,
-    meta_tags=[
-        {"name": "viewport", "content": "width=device-width, initial-scale=1.0"}
-    ],
-)
 #create the layout
-app.layout = create_layout()
+dash_app.layout = create_layout()
 #define location of output directory
 
 input_data = {}
@@ -575,5 +570,5 @@ for study_area in ["gumobila", "enerata", "mender"]:
     input_data[study_area]["background_map"] = create_background_map(watersheds)
 
 
-interactiveParetoFront(app, input_data, save_front = None)
-app.run_server(debug=True)
+interactiveParetoFront(dash_app, input_data, save_front = None)
+dash_app.run_server(debug=True)
