@@ -568,4 +568,4 @@ for study_area in ["gumobila", "enerata", "mender"]:
 
 
 interactiveParetoFront(dash_app, input_data, save_front = None)
-dash_app.run_server(debug=True)
+dash_app.run_server(debug=True, mode = 'external', port = 8050)
