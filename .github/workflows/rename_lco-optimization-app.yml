@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'lco-optimization-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11D22120DFC14613A83CBDFE78A68D28 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E7937538ACB64ECC9F89D67D76663513 }}
