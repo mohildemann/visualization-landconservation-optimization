@@ -568,4 +568,5 @@ for study_area in ["gumobila", "enerata", "mender"]:
 
 
 interactiveParetoFront(dash_app, input_data, save_front = None)
-dash_app.run_server(mode = 'external', port = 8050)
+if __name__ == '__main__':
+    dash_app.run_server(debug=True)
