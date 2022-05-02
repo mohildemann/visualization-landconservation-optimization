@@ -1,20 +1,16 @@
 import os
-import pathlib
-import re
-from area import area
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output
 import plotly.graph_objs as go
+from dash.exceptions import PreventUpdate
 from plotly.subplots import make_subplots
 import plotly.io as pio
 import pickle
 import json
 import numpy as np
-import cufflinks
-import area
 
 
 class Solution:
