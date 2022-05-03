@@ -144,10 +144,6 @@ def create_layout():
                                                 "label": "Scatter plot",
                                                 "value": "scatter",
                                             },
-                                            {
-                                                "label": "Mixed",
-                                                "value": "mixed",
-                                            },
                                         ],
                                         value="boxplot",
                                         id="plotmode-dropdown",
